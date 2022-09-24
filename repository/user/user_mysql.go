@@ -88,7 +88,7 @@ func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
 	return res.LastInsertId()
 }
 func (r *user) Update(ctx context.Context, p *models.User) (*models.User, error) {
-	query := "UPDATE users SET Username=?, Email=?, Password=? WHERE UserID=?"
+	query := "UPDATE user SET Username=?, Email=?, Password=? WHERE UserID=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
