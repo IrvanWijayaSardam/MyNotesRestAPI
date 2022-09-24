@@ -1,6 +1,6 @@
 # MyNotesRESTAPI
 
-Spesification :
+Requirements :
 
 - Docker 
 - Go
