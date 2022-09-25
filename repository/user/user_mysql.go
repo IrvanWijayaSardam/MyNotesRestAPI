@@ -69,6 +69,25 @@ func (r *user) GetByID(ctx context.Context, UserID int64) (*models.User, error) 
 
 	return payload, nil
 }
+
+func (r *user) GetUserByEmail(ctx context.Context, Email string) (*models.User, error) {
+	query := "SELECT * FROM user where Email=?"
+
+	rows, err := r.fetch(ctx, query, Email)
+	if err != nil {
+		return nil, err
+	}
+
+	payload := &models.User{}
+
+	if len(rows) > 0 {
+		payload = rows[0]
+	} else {
+		return nil, models.ErrNotFound
+	}
+
+	return payload, nil
+}
 func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
 	query := "INSERT INTO user SET Username=?, Email=?, Password =?"
 

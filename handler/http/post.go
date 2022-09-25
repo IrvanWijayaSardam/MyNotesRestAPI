@@ -126,7 +126,7 @@ func (p *Post) GetByID(w http.ResponseWriter, r *http.Request) {
 	respondwithJSON(w, http.StatusOK, payload)
 }
 
-// GetByID returns a post details
+// GetByID returns a user details
 func (p *PostUser) GetUserByID(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 	payload, err := p.repo.GetByID(r.Context(), int64(id))
@@ -134,6 +134,20 @@ func (p *PostUser) GetUserByID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		respondWithError(w, http.StatusNoContent, "Content not found")
 	}
+
+	respondwithJSON(w, http.StatusOK, payload)
+}
+
+// GetByID returns a user details
+func (p *PostUser) GetUserByEmail(w http.ResponseWriter, r *http.Request) {
+	email := chi.URLParam(r, "email")
+	payload, err := p.repo.GetUserByEmail(r.Context(), email)
+
+	if err != nil {
+		respondWithError(w, http.StatusNoContent, "Content not found")
+	}
+
+	fmt.Println(email)
 
 	respondwithJSON(w, http.StatusOK, payload)
 }

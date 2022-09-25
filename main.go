@@ -32,6 +32,7 @@ func main() {
 	r.Route("/", func(rt chi.Router) {
 		rt.Mount("/notes", postRouter(pHandler))
 		rt.Mount("/user", userRouter(uHandler))
+		rt.Mount("/auth", authRouter(uHandler))
 	})
 
 	fmt.Println("Server Listen at : 8006")
@@ -57,5 +58,11 @@ func userRouter(uHandler *ph.PostUser) http.Handler {
 	r.Put("/{id:[0-9]+}", uHandler.UpdateUser)
 	r.Delete("/{id:[0-9]+}", uHandler.DeleteUser)
 
+	return r
+}
+
+func authRouter(uHandler *ph.PostUser) http.Handler {
+	r := chi.NewRouter()
+	r.Get("/{email:}", uHandler.GetUserByEmail)
 	return r
 }
