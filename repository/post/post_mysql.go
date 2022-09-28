@@ -36,6 +36,7 @@ func (r *Post) fetch(ctx context.Context, query string, args ...interface{}) ([]
 			&data.Description,
 			&data.Date,
 			&data.UserID,
+			&data.Image,
 		)
 		if err != nil {
 			return nil, err

@@ -43,7 +43,7 @@ type PostUser struct {
 }
 
 func (p *Post) Fetch(w http.ResponseWriter, r *http.Request) {
-	payload, _ := p.repo.Fetch(r.Context(), 5)
+	payload, _ := p.repo.Fetch(r.Context(), 100)
 
 	respondwithJSON(w, http.StatusOK, payload)
 }

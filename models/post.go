@@ -7,6 +7,7 @@ type Post struct {
 	Description string `json:"description"`
 	Date        string `json:"date"`
 	UserID      string `json:"userid"`
+	Image       string `json:"image"`
 	// created_at time.Time `json:"created_at"`
 	// updated_at time.Time `json:"updated_at"`
 }

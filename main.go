@@ -100,6 +100,7 @@ func authRouter(uHandler *ph.PostUser) http.Handler {
 
 func getJWTRouter(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Ini rahasia")
+
 }
 
 func isAuthorised(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
@@ -119,7 +120,6 @@ func isAuthorised(endpoint func(http.ResponseWriter, *http.Request)) http.Handle
 			if token.Valid {
 				endpoint(w, r)
 			}
-
 		} else {
 			fmt.Fprintf(w, "Not Authorized")
 		}
