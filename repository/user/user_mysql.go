@@ -35,6 +35,8 @@ func (r *user) fetch(ctx context.Context, query string, args ...interface{}) ([]
 			&data.Username,
 			&data.Email,
 			&data.Password,
+			&data.Profile,
+			&data.Jk,
 		)
 		if err != nil {
 			return nil, err
