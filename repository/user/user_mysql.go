@@ -96,7 +96,7 @@ func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
 		return -1, err
 	}
 
-	res, err := stmt.ExecContext(ctx, p.Username, p.Email, p.Password)
+	res, err := stmt.ExecContext(ctx, p.Username, p.Email, p.Password, p.Profile)
 	defer stmt.Close()
 
 	fmt.Println(p.Username, p.Email, p.Password)
