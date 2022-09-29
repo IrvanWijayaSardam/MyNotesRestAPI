@@ -89,14 +89,14 @@ func (r *user) GetUserByEmail(ctx context.Context, Email string) (*models.User, 
 	return payload, nil
 }
 func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
-	query := "INSERT INTO user SET Username=?, Email=?, Password =?, Profile=?"
+	query := "INSERT INTO user SET Username=?, Email=?, Password =?, Profile=?,Jk=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
 		return -1, err
 	}
 
-	res, err := stmt.ExecContext(ctx, p.Username, p.Email, p.Password, p.Profile)
+	res, err := stmt.ExecContext(ctx, p.Username, p.Email, p.Password, p.Profile, p.Jk)
 	defer stmt.Close()
 
 	fmt.Println(p.Username, p.Email, p.Password)
@@ -107,7 +107,7 @@ func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
 	return res.LastInsertId()
 }
 func (r *user) Update(ctx context.Context, p *models.User) (*models.User, error) {
-	query := "UPDATE user SET Username=?, Email=?, Password=?, Profile=? WHERE UserID=?"
+	query := "UPDATE user SET Username=?, Email=?, Password=?, Profile=?,Jk=? WHERE UserID=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
@@ -119,6 +119,8 @@ func (r *user) Update(ctx context.Context, p *models.User) (*models.User, error)
 		p.Username,
 		p.Email,
 		p.Password,
+		p.Profile,
+		p.Jk,
 		p.UserID,
 	)
 	if err != nil {
