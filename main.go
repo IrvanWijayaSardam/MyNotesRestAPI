@@ -39,7 +39,7 @@ func main() {
 	dbName := "MyNotes"
 	dbPass := "root"
 	dbHost := "localhost"
-	dbPort := "3306"
+	dbPort := "3309"
 
 	tokenString, err := generateJWT()
 	if err != nil {

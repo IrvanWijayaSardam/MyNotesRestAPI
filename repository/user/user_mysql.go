@@ -89,7 +89,7 @@ func (r *user) GetUserByEmail(ctx context.Context, Email string) (*models.User, 
 	return payload, nil
 }
 func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
-	query := "INSERT INTO user SET Username=?, Email=?, Password =?"
+	query := "INSERT INTO user SET Username=?, Email=?, Password =?, Profile=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
@@ -107,7 +107,7 @@ func (r *user) Create(ctx context.Context, p *models.User) (int64, error) {
 	return res.LastInsertId()
 }
 func (r *user) Update(ctx context.Context, p *models.User) (*models.User, error) {
-	query := "UPDATE user SET Username=?, Email=?, Password=? WHERE UserID=?"
+	query := "UPDATE user SET Username=?, Email=?, Password=?, Profile=? WHERE UserID=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
