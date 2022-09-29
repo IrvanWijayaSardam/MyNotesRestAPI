@@ -67,7 +67,7 @@ func (p *Post) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondwithJSON(w, http.StatusCreated, map[string]string{"message": "Successfully Created"})
+	respondwithJSON(w, http.StatusCreated, map[string]string{"message": "Successfully Created Notes"})
 }
 
 // Create a new User

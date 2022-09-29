@@ -9,6 +9,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mynotes
     ports:
-      - "3309:3307"
+      - "3309:3306"
     volumes:
       - $HOME/Desktop/MySQL-Snippets/school.sql:/school.sql

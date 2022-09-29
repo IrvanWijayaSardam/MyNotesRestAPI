@@ -72,14 +72,14 @@ func (r *Post) GetByID(ctx context.Context, UserID int64) (*models.Post, error) 
 	return payload, nil
 }
 func (r *Post) Create(ctx context.Context, p *models.Post) (int64, error) {
-	query := "INSERT INTO notes SET ID=?, Title=?, Description=?, Date=?,UserID =?"
+	query := "INSERT INTO notes SET ID=?, Title=?, Description=?, Date=?,UserID =?, Image=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
 		return -1, err
 	}
 
-	res, err := stmt.ExecContext(ctx, p.ID, p.Title, p.Description, p.Date, p.UserID)
+	res, err := stmt.ExecContext(ctx, p.ID, p.Title, p.Description, p.Date, p.UserID, p.Image)
 	defer stmt.Close()
 
 	fmt.Println(p.ID, p.Title, p.Description, p.UserID)
@@ -90,7 +90,7 @@ func (r *Post) Create(ctx context.Context, p *models.Post) (int64, error) {
 	return res.LastInsertId()
 }
 func (r *Post) Update(ctx context.Context, p *models.Post) (*models.Post, error) {
-	query := "UPDATE notes SET title=?, description=?,Date =?, userid=? WHERE id=?"
+	query := "UPDATE notes SET title=?, description=?,Date =?, userid=?, Image=? WHERE id=?"
 
 	stmt, err := r.db.PrepareContext(ctx, query)
 	if err != nil {
@@ -103,6 +103,7 @@ func (r *Post) Update(ctx context.Context, p *models.Post) (*models.Post, error)
 		p.Description,
 		p.Date,
 		p.UserID,
+		p.Image,
 		p.ID,
 	)
 	if err != nil {
