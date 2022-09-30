@@ -64,7 +64,7 @@ func (r *user) GetByID(ctx context.Context, UserID int64) (*models.User, error) 
 	payload := &models.User{}
 
 	if len(rows) > 0 {
-		payload = rows[0]
+
 	} else {
 		return nil, models.ErrNotFound
 	}

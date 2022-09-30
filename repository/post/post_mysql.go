@@ -56,9 +56,18 @@ func (r *Post) Fetch(ctx context.Context, num int64) ([]*models.Post, error) {
 func (r *Post) GetByID(ctx context.Context, UserID int64) (*models.Post, error) {
 	query := "SELECT * FROM notes where UserID=?"
 
-	r.fetch(ctx, query, UserID)
+	rows, err := r.fetch(ctx, query, UserID)
+	if err != nil {
+		return nil, err
+	}
 
 	payload := &models.Post{}
+
+	if len(rows) > 0 {
+		payload = rows[0]
+	} else {
+		return nil, models.ErrNotFound
+	}
 
 	return payload, nil
 }
