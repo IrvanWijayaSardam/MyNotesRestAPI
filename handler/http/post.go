@@ -117,11 +117,7 @@ func (p *PostUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 // GetByID returns a post details
 func (p *Post) GetByID(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
-	payload, err := p.repo.GetByID(r.Context(), int64(id))
-
-	if err != nil {
-		respondWithError(w, http.StatusNoContent, "Content not found")
-	}
+	payload, _ := p.repo.GetByID(r.Context(), int64(id))
 
 	respondwithJSON(w, http.StatusOK, payload)
 }
