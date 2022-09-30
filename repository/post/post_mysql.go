@@ -53,23 +53,10 @@ func (r *Post) Fetch(ctx context.Context, num int64) ([]*models.Post, error) {
 	return r.fetch(ctx, query, num)
 }
 
-func (r *Post) GetByID(ctx context.Context, UserID int64) (*models.Post, error) {
+func (r *Post) GetByID(ctx context.Context, UserID int64) ([]*models.Post, error) {
 	query := "SELECT * FROM notes where UserID=?"
 
-	rows, err := r.fetch(ctx, query, UserID)
-	if err != nil {
-		return nil, err
-	}
-
-	payload := &models.Post{}
-
-	if len(rows) > 0 {
-		payload = rows[0]
-	} else {
-		return nil, models.ErrNotFound
-	}
-
-	return payload, nil
+	return r.fetch(ctx, query, UserID)
 }
 func (r *Post) Create(ctx context.Context, p *models.Post) (int64, error) {
 	query := "INSERT INTO notes SET ID=?, Title=?, Description=?, Date=?,UserID =?, Image=?"
